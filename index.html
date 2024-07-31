@@ -19,16 +19,33 @@
         <button id="watermark-img-btn">添加图片水印</button>
         <div class="work-panel-menu">
             <div class="watermark-menu menu-item">
-                <input type="text" id="watermark-text">
+                <input type="text" id="watermark-text" placeholder="水印文字">
+                <label>位置</label>
                 <select id="watermark-position">
                     <option value="0">左上</option>
                     <option value="1">右上</option>
                     <option value="2">左下</option>
                     <option value="3">右下</option>
                     <option value="4">中心</option>
+                    <option value="5">平铺</option>
                 </select>
+                <label>字体大小</label>
                 <select id="watermark-font-size">
                 </select>
+            </div>
+            <div class="watermark-img-menu menu-item">
+                <button id="watermark-img-upload">上传图片</button>
+                <input type="file" id="watermark-img">
+                <label>位置</label>
+                <select id="watermark-img-position">
+                    <option value="0">左上</option>
+                    <option value="1">右上</option>
+                    <option value="2">左下</option>
+                    <option value="3">右下</option>
+                    <option value="4">中心</option>
+                </select>
+                <label>尺寸</label>
+                <input type="range" id="watermark-img-size" min="0" max="200" step="1">
             </div>
         </div>
     </div>

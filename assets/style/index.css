@@ -26,6 +26,15 @@ input, select {
     border-radius: 6px;
     padding: 6px 12px 8px 12px;
 }
+input[type="range"] {
+    vertical-align: middle;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+label {
+    vertical-align: middle;
+    margin-right: 5px;
+}
 .btn-alt {
     border: solid 1px var(--main-color);
     background-color: transparent;
@@ -45,7 +54,12 @@ input, select {
     color: #fff;
     font-size: 1.2em;
 }
-#file-input {
+
+#file-input,
+#work-area,
+#work-canvas,
+#watermark-img,
+.menu-item {
     display: none;
 }
 
@@ -53,7 +67,6 @@ input, select {
     width: 100vw;
     height: 100vh;
     flex-direction: column;
-    display: none;
 }
 .work-panel {
     margin: 20px 0 15px 0;
@@ -65,11 +78,11 @@ input, select {
 }
 .work-panel-menu {
     position: absolute;
-    bottom: -45px;
+    bottom: -56px;
     left: 20px;
-}
-.menu-item {
-    display: none;
+    font-size: 14px;
+    padding: 6px;
+    background-color: #ffffffcc;
 }
 .work-container {
     flex: 1;
@@ -84,6 +97,12 @@ input, select {
     height: 100%;
     object-fit: contain;
 }
-#work-canvas {
-    display: none;
+.work-panel-menu button, .work-panel-menu input, .work-panel-menu select {
+    padding: 4px 10px 6px 10px;
+}
+.menu-item button, .menu-item input, .menu-item select {
+    margin-right: 15px;
+}
+.menu-item *:last-child {
+    margin-right: 0;
 }
