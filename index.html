@@ -17,6 +17,7 @@
         <button id="reset" class="btn-alt">返 回</button>
         <button id="watermark-btn">添加水印</button>
         <button id="watermark-img-btn">添加图片水印</button>
+        <button id="scale-btn">调整尺寸</button>
         <div class="work-panel-menu">
             <div class="watermark-menu menu-item">
                 <input type="text" id="watermark-text" placeholder="水印文字">
@@ -47,6 +48,14 @@
                 <label>尺寸</label>
                 <input type="range" id="watermark-img-size" min="0" max="200" step="1">
             </div>
+            <div class="scale-menu menu-item">
+                <button id="scale-reset">重置</button>
+                <input type="number" step="1" id="scale-width" placeholder="宽" style="width: 100px;margin-right: 0;">
+                &times;
+                <input type="number" id="scale-height" placeholder="高" style="width: 100px;">
+                <label for="scale-keep-ratio">保持比例</label>
+                <input type="checkbox" id="scale-keep-ratio" value="1" checked style="vertical-align: middle">
+            </div>
         </div>
     </div>
     <div class="work-container">
@@ -55,6 +64,6 @@
 </div>
 <canvas id="work-canvas"></canvas>
 
-<script type="text/javascript" src="assets/js/index.js"></script>
+<script type="module" src="assets/js/index.js"></script>
 </body>
 </html>
