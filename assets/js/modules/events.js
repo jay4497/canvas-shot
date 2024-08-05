@@ -18,6 +18,7 @@ import {
 } from "./common.js"
 import * as Els from './elements.js'
 import * as State from "./state.js"
+import { rotateUpdate, rotateReset, reverse } from "./rotate.js"
 
 // 初次加载状态
 let loaded = false
@@ -31,6 +32,7 @@ export function initEvents() {
                 file: files[0],
                 callback(image) {
                     const canvas = document.createElement('canvas')
+                    canvas.style.backgroundColor = 'rgba(0, 0, 0, 0)'
                     const context = canvas.getContext('2d')
                     canvas.width = image.width
                     canvas.height = image.height
@@ -110,5 +112,14 @@ function initWorkAreaEvents() {
     Els.elScaleResetBtn.addEventListener('click', scaleReset)
     Els.elScaleWidth.addEventListener('blur', scaleUpdate)
     Els.elScaleHeight.addEventListener('blur', scaleUpdate)
+
+    Els.elRotateBtn.addEventListener('click', () => {
+        toggleMenu('.rotate-menu')
+    })
+    Els.elRotateResetBtn.addEventListener('click', rotateReset)
+    Els.elRotateLeft.addEventListener('click', rotateUpdate)
+    Els.elRotateRight.addEventListener('click', rotateUpdate)
+    Els.elRotateReverseXBtn.addEventListener('click', reverse)
+    Els.elRotateReverseYBtn.addEventListener('click', reverse)
 }
 

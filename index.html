@@ -18,6 +18,7 @@
         <button id="watermark-btn">添加水印</button>
         <button id="watermark-img-btn">添加图片水印</button>
         <button id="scale-btn">调整尺寸</button>
+        <button id="rotate-btn">旋转图片</button>
         <div class="work-panel-menu">
             <div class="watermark-menu menu-item">
                 <input type="text" id="watermark-text" placeholder="水印文字">
@@ -55,6 +56,15 @@
                 <input type="number" id="scale-height" placeholder="高" style="width: 100px;">
                 <label for="scale-keep-ratio">保持比例</label>
                 <input type="checkbox" id="scale-keep-ratio" value="1" checked style="vertical-align: middle">
+            </div>
+            <div class="rotate-menu menu-item">
+                <button id="rotate-reset">重置</button>
+                <label for="rotate-step">度数</label>
+                <input type="number" id="rotate-step" placeholder="30" style="margin-right: 0;width: 50px;">
+                <button id="rotate-left" data-type="left" style="margin-right: 0;">逆时针</button>
+                <button id="rotate-right" data-type="right">顺时针</button>
+                <button id="rotate-reverse-x" data-type="x">平行翻转</button>
+                <button id="rotate-reverse-y" data-type="y">垂直翻转</button>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
  * module common
  */
 
-import { initArea, elWorkArea } from "./elements.js"
+import { initArea, elWorkArea, elFinalImage } from "./elements.js"
 import { getState } from "./state.js"
 
 /**
@@ -86,6 +86,15 @@ export function toggleMenu(currentSelector) {
         }
         el.style.display = 'none'
     })
-    console.log(menu)
     menu.style.display = menu.style.display === 'block'? 'none': 'block'
+
+    if (document.querySelector('.scale-menu').style.display !== 'none') {
+        elFinalImage.style.width = 'auto'
+        elFinalImage.style.height = 'auto'
+        elFinalImage.style.objectFit = 'none'
+    } else {
+        elFinalImage.style.width = '100%'
+        elFinalImage.style.height = '100%'
+        elFinalImage.style.objectFit = 'contain'
+    }
 }

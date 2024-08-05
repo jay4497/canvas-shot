@@ -18,6 +18,7 @@ export function watermarkUpdate() {
     const text = Els.elWatermarkText.value.trim()
     const position = Els.elWatermarkPosition.value
     const fontSize = Els.elWatermarkFontSize.value || 16
+    const padding = parseInt(fontSize)
     if (text.length === 0) {
         return
     }
@@ -25,17 +26,17 @@ export function watermarkUpdate() {
     drawSourceImage()
     context.font = fontSize + 'px "Microsoft YaHei",sans-serif'
     const textWidth = context.measureText(text).width
-    let _x = 10, _y = parseInt(fontSize) + 10
+    let _x = padding, _y = parseInt(fontSize) + padding
     let points = []
     if (position == 1) {
-        _x = canvas.width - 10 - textWidth
+        _x = canvas.width - padding - textWidth
     }
     if (position == 2) {
-        _y = canvas.height - 10
+        _y = canvas.height - padding
     }
     if (position == 3) {
-        _x = canvas.width - 10 - textWidth
-        _y = canvas.height - 10
+        _x = canvas.width - padding - textWidth
+        _y = canvas.height - padding
     }
     if (position == 4) {
         _x = canvas.width / 2 - (textWidth / 2)
@@ -50,9 +51,9 @@ export function watermarkUpdate() {
                 _x,
                 _y
             })
-            _x += 50 + parseInt(textWidth)
+            _x += (padding * 4) + parseInt(textWidth)
             if (_x >= canvas.width + (canvas.width / 2)) {
-                _y += 100 + parseInt(fontSize)
+                _y += (padding * 8) + parseInt(fontSize)
                 if (_flag) {
                     _x = -canvas.width / 2 - textWidth / 2
                 } else {
