@@ -2,7 +2,7 @@
  * module scale
  */
 
-import { getDataURL } from "./common.js"
+import { getDataURL, setImage } from "./common.js"
 import * as Els from './elements.js'
 import { getState } from "./state.js"
 
@@ -37,7 +37,7 @@ export function scaleUpdate() {
         canvas.width = scaleWidth
         canvas.height = scaleHeight
         context.drawImage(_sourceImage, 0, 0, scaleWidth, scaleHeight)
-        Els.elFinalImage.setAttribute('src', getDataURL(canvas))
+        setImage(canvas, Els.elFinalImage)
     }
 }
 
@@ -54,5 +54,5 @@ export function scaleReset() {
     Els.elScaleWidth.value = imageWidth
     Els.elScaleHeight.value = imageHeight
     context.drawImage(sourceImage, 0, 0, imageWidth, imageHeight)
-    Els.elFinalImage.setAttribute('src', getDataURL(canvas))
+    setImage(canvas, Els.elFinalImage)
 }

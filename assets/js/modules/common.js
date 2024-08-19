@@ -2,8 +2,8 @@
  * module common
  */
 
-import { initArea, elWorkArea, elFinalImage } from "./elements.js"
-import { getState } from "./state.js"
+import { initArea, elWorkArea, elFinalImage, elQuality } from "./elements.js"
+import { getState, setState } from "./state.js"
 
 /**
  * 上传源图片
@@ -14,10 +14,12 @@ import { getState } from "./state.js"
 export function upload(options) {
     initArea.style.display = 'none'
     elWorkArea.style.display = 'flex'
+
     const file = options.file
     if (!isImage(file)) {
         throw new Error('invalid image')
     }
+
     const fileReader = new FileReader()
     fileReader.onload = () => {
         const img = new Image()
@@ -53,10 +55,46 @@ export function isImage(file) {
 /**
  * 从 canvas 对象获取图片base64
  * @param {HTMLCanvasElement} canvas
+ * @param {boolean=} png force png format
  * @returns {string}
  */
-export function getDataURL(canvas) {
-    return canvas.toDataURL('png', 0.7)
+export function getDataURL(canvas, png = false) {
+    let imageType = getState('type', 'image/png')
+    if (png) {
+        imageType = 'image/png'
+    }
+    return canvas.toDataURL(imageType, 1)
+}
+
+/**
+ * 图片生成
+ * @param {HTMLCanvasElement} canvas
+ * @param {HTMLImageElement} elimg
+ */
+export function setImage(canvas, elimg) {
+    const imageType = getState('type')
+    const quality = getState('quality')
+    console.log(imageType)
+    if (quality == 1) {
+        elimg.setAttribute('src', getDataURL(canvas))
+        return
+    }
+    if (imageType === 'image/png') {
+        canvas.toBlob(blob => {
+            const reader = new FileReader()
+            reader.onload = () => {
+                const pngQuality = Math.floor(255 * quality)
+                const upngFrames = UPNG.toRGBA8(UPNG.decode(reader.result))
+                const outputArrayBuff = UPNG.encode(upngFrames, canvas.width, canvas.height, pngQuality)
+                const newBlob = new Blob([outputArrayBuff], {type: imageType})
+                elimg.setAttribute('src', URL.createObjectURL(newBlob))
+            }
+            reader.readAsArrayBuffer(blob)
+        })
+    } else {
+        const imageDataURL = canvas.toDataURL(imageType, quality)
+        elimg.setAttribute('src', imageDataURL)
+    }
 }
 
 /**

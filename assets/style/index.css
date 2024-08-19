@@ -106,3 +106,9 @@ label {
 .menu-item *:last-child {
     margin-right: 0;
 }
+
+.col-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

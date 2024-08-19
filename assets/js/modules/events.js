@@ -13,12 +13,14 @@ import {
 } from "./scale.js"
 import {
     getDataURL,
+    setImage,
     upload,
     toggleMenu
 } from "./common.js"
 import * as Els from './elements.js'
 import * as State from "./state.js"
 import { rotateUpdate, rotateReset, reverse } from "./rotate.js"
+import { download } from "./export.js"
 
 // 初次加载状态
 let loaded = false
@@ -31,6 +33,11 @@ export function initEvents() {
             upload({
                 file: files[0],
                 callback(image) {
+                    let quality = parseFloat(Els.elQuality.value).toFixed(1)
+                    if (quality < 0 || quality > 1 || quality === 'NaN') {
+                        quality = 0.3
+                    }
+
                     const canvas = document.createElement('canvas')
                     canvas.style.backgroundColor = 'rgba(0, 0, 0, 0)'
                     const context = canvas.getContext('2d')
@@ -41,9 +48,11 @@ export function initEvents() {
                     State.setState({
                         canvas,
                         context,
-                        sourceImage: image
+                        quality,
+                        sourceImage: image,
+                        type: files[0].type
                     })
-                    Els.elFinalImage.setAttribute('src', getDataURL(canvas))
+                    setImage(canvas, Els.elFinalImage)
                     if (!loaded) {
                         initWorkAreaEvents()
                     }
@@ -62,7 +71,7 @@ function initWorkAreaEvents() {
     Els.elResetBtn.addEventListener('click', () => {
         const { canvas, context } = State.getState()
         context.clearRect(0, 0, canvas.width, canvas.height)
-        Els.elFinalImage.setAttribute('src', '')
+        Els.elFinalImage.removeAttribute('src')
         Els.initArea.style.display = 'flex'
         Els.elWorkArea.style.display = 'none'
         document.querySelectorAll('.menu-item').forEach((el) => {
@@ -121,5 +130,10 @@ function initWorkAreaEvents() {
     Els.elRotateRight.addEventListener('click', rotateUpdate)
     Els.elRotateReverseXBtn.addEventListener('click', reverse)
     Els.elRotateReverseYBtn.addEventListener('click', reverse)
+
+    Els.elExportBtn.addEventListener('click', () => {
+        toggleMenu('.export-menu')
+    })
+    Els.elExportDownload.addEventListener('click', download)
 }
 

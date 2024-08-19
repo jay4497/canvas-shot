@@ -4,7 +4,7 @@
 
 import { elRotateStep, elFinalImage } from "./elements.js"
 import { getState } from "./state.js"
-import { drawSourceImage, getDataURL } from "./common.js"
+import { drawSourceImage, getDataURL, setImage } from "./common.js"
 
 let radius = 0
 
@@ -29,7 +29,7 @@ export function rotateUpdate() {
     context.translate(-canvas.width / 2, -canvas.height / 2)
     context.drawImage(sourceImage, (canvas.width - sourceImage.width) / 2, (canvas.height - sourceImage.height) / 2, sourceImage.width, sourceImage.height)
     context.setTransform(1, 0, 0, 1, 0, 0)
-    elFinalImage.setAttribute('src', getDataURL(canvas))
+    setImage(canvas, elFinalImage)
 }
 
 export function reverse() {
@@ -49,7 +49,7 @@ export function reverse() {
     context.scale(scaleX, scaleY)
     context.translate(transX, transY)
     context.drawImage(sourceImage, 0, 0, sourceImage.width, sourceImage.height)
-    elFinalImage.setAttribute('src', getDataURL(canvas))
+    setImage(canvas, elFinalImage)
 }
 
 export function rotateReset() {
@@ -58,5 +58,5 @@ export function rotateReset() {
     canvas.width = sourceImage.width
     canvas.height = sourceImage.height
     drawSourceImage()
-    elFinalImage.setAttribute('src', getDataURL(canvas))
+    setImage(canvas, elFinalImage)
 }

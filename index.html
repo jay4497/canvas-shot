@@ -9,7 +9,14 @@
 
 <body>
 <div id="init-area">
-    <button id="upload-btn">上传图片</button>
+    <div class="col-container">
+        <button id="upload-btn">上传图片</button>
+        <div style="margin-top: 20px;">
+            <label for="quality" style="">压缩比: </label>
+            <input type="number" id="quality" value="0.3" min="0" max="1" step="0.1" style="max-width: 60px">
+            <span style="font-size: .9em;opacity: .6;margin-left: 4px;">压缩比为1时表示不做压缩处理</span>
+        </div>
+    </div>
     <input type="file" id="file-input">
 </div>
 <div id="work-area">
@@ -19,6 +26,7 @@
         <button id="watermark-img-btn">添加图片水印</button>
         <button id="scale-btn">调整尺寸</button>
         <button id="rotate-btn">旋转图片</button>
+        <button id="export-btn">导出图片</button>
         <div class="work-panel-menu">
             <div class="watermark-menu menu-item">
                 <input type="text" id="watermark-text" placeholder="水印文字">
@@ -66,6 +74,9 @@
                 <button id="rotate-reverse-x" data-type="x">平行翻转</button>
                 <button id="rotate-reverse-y" data-type="y">垂直翻转</button>
             </div>
+            <div class="export-menu menu-item">
+                <button id="export-download">下载</button>
+            </div>
         </div>
     </div>
     <div class="work-container">
@@ -74,6 +85,8 @@
 </div>
 <canvas id="work-canvas"></canvas>
 
+<script src="assets/js/pako.js"></script>
+<script src="assets/js/UPNG.js"></script>
 <script type="module" src="assets/js/index.js"></script>
 </body>
 </html>

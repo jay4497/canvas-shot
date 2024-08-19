@@ -2,7 +2,7 @@
  * module watermark
  */
 
-import { getDataURL, drawSourceImage, isImage } from "./common.js"
+import { getDataURL, drawSourceImage, isImage, setImage } from "./common.js"
 import * as Els from './elements.js'
 import { getState } from "./state.js"
 
@@ -82,7 +82,7 @@ export function watermarkUpdate() {
     }
     context.setTransform(1, 0, 0, 1, 0, 0)
     context.globalAlpha = 1
-    Els.elFinalImage.setAttribute('src', getDataURL(canvas))
+    setImage(canvas, Els.elFinalImage)
 }
 
 /**
@@ -107,7 +107,7 @@ export function watermarkImgUpload(options) {
             const _ctx = _canvas.getContext('2d')
             _ctx.globalAlpha = 0.3
             _ctx.drawImage(image, 0, 0, image.width, image.height)
-            const _watermark = _canvas.toDataURL()
+            const _watermark = getDataURL(_canvas, true)
             const _image = new Image()
             _image.src = _watermark
             _image.onload = () => {
@@ -132,18 +132,19 @@ export function watermarkImgUpdate() {
     const position = Els.elWatermarkImgPosition.value
     const size = Els.elWatermarkImgSize.value
     const scale = size / 100
+    const padding = (canvas.width + canvas.height) / 50
     watermarkSource.width = watermarkSourceWidth * scale
     watermarkSource.height = watermarkSourceHeight * scale
-    let _x = 10, _y = 10
+    let _x = padding, _y = padding
     if (position == 1) {
-        _x = canvas.width - 10 - watermarkSource.width
+        _x = canvas.width - padding - watermarkSource.width
     }
     if (position == 2) {
-        _y = canvas.height - 10 - watermarkSource.height
+        _y = canvas.height - padding - watermarkSource.height
     }
     if (position == 3) {
-        _x = canvas.width - 10 - watermarkSource.width
-        _y = canvas.height - 10 - watermarkSource.height
+        _x = canvas.width - padding - watermarkSource.width
+        _y = canvas.height - padding - watermarkSource.height
     }
     if (position == 4) {
         _x = canvas.width / 2 - watermarkSource.width / 2
@@ -151,5 +152,5 @@ export function watermarkImgUpdate() {
     }
     drawSourceImage()
     context.drawImage(watermarkSource, _x, _y, watermarkSource.width, watermarkSource.height)
-    Els.elFinalImage.setAttribute('src', getDataURL(canvas))
+    setImage(canvas, Els.elFinalImage)
 }

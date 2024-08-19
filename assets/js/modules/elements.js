@@ -3,6 +3,7 @@
  */
 
 export const elFinalImage = document.getElementById('work-image')
+export const elQuality = document.getElementById('quality')
 export const initArea = document.getElementById('init-area')
 export const elUploadBtn = document.getElementById('upload-btn')
 export const elFileInput = document.getElementById('file-input')
@@ -32,3 +33,6 @@ export const elRotateLeft = document.getElementById('rotate-left')
 export const elRotateRight = document.getElementById('rotate-right')
 export const elRotateReverseXBtn = document.getElementById('rotate-reverse-x')
 export const elRotateReverseYBtn = document.getElementById('rotate-reverse-y')
+
+export const elExportBtn = document.getElementById('export-btn')
+export const elExportDownload = document.getElementById('export-download')
