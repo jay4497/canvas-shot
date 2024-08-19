@@ -74,7 +74,6 @@ export function getDataURL(canvas, png = false) {
 export function setImage(canvas, elimg) {
     const imageType = getState('type')
     const quality = getState('quality')
-    console.log(imageType)
     if (quality == 1) {
         elimg.setAttribute('src', getDataURL(canvas))
         return
@@ -135,4 +134,14 @@ export function toggleMenu(currentSelector) {
         elFinalImage.style.height = '100%'
         elFinalImage.style.objectFit = 'contain'
     }
+}
+
+export function download() {
+    const image = elFinalImage.getAttribute('src')
+    const downloadLink = document.createElement('a')
+    downloadLink.download = Date.now()
+    downloadLink.href = image
+    const clickEvent = document.createEvent('MouseEvents')
+    clickEvent.initMouseEvent('click', false, false)
+    downloadLink.dispatchEvent(clickEvent)
 }

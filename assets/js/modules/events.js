@@ -12,15 +12,15 @@ import {
     scaleReset
 } from "./scale.js"
 import {
-    getDataURL,
     setImage,
     upload,
-    toggleMenu
+    toggleMenu,
+    download
 } from "./common.js"
 import * as Els from './elements.js'
 import * as State from "./state.js"
 import { rotateUpdate, rotateReset, reverse } from "./rotate.js"
-import { download } from "./export.js"
+import { convertTo } from "./convert.js"
 
 // 初次加载状态
 let loaded = false
@@ -135,5 +135,11 @@ function initWorkAreaEvents() {
         toggleMenu('.export-menu')
     })
     Els.elExportDownload.addEventListener('click', download)
+
+    Els.elConvertBtn.addEventListener('click', () => {
+        toggleMenu('.convert-menu')
+    })
+    Els.elConvertToJpg.addEventListener('click', convertTo.bind(null, 'jpg'))
+    Els.elConvertToPng.addEventListener('click', convertTo.bind(null, 'png'))
 }
 

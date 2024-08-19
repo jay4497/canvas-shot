@@ -36,3 +36,7 @@ export const elRotateReverseYBtn = document.getElementById('rotate-reverse-y')
 
 export const elExportBtn = document.getElementById('export-btn')
 export const elExportDownload = document.getElementById('export-download')
+
+export const elConvertBtn = document.getElementById('convert-btn')
+export const elConvertToPng = document.getElementById('convert-png')
+export const elConvertToJpg = document.getElementById('convert-jpg')
